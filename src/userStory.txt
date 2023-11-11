@@ -1,0 +1,5 @@
+User Story, multi examples: 
+As a user, I want to search recipes, SO THAT I can find new meal ideas
+As a user, I want to be able to update the number of serverings, so that i can cook a meal for a number of people
+As a user, I want to be able to bookmark recipes, so i can review them
+As a user, I want to be able to create my own recipes, so that i have them all organized 
