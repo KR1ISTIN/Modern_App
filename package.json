@@ -2,7 +2,6 @@
   "name": "modern_app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
@@ -19,6 +18,7 @@
   },
   "homepage": "https://github.com/KR1ISTIN/Modern_App#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.10.2",
     "parcel": "^2.10.2"
   }
 }
