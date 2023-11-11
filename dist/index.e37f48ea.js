@@ -588,10 +588,24 @@ const timeout = function(s) {
 };
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
+// spinner while loading recipes  
+const renderSpinner = function(parentElement) {
+    const markup = `
+    <div class="spinner">
+      <svg>
+        <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
+      </svg>
+    </div> 
+  `;
+    parentElement.innerHTML = "";
+    parentElement.insertAdjacentHTML("afterbegin", markup);
+};
 // creating a async function so that the function can run asyncronously 
 const showRecipe = async function() {
     // wrap in try and catch to help with err handling 
     try {
+        // passing recipeContainer to func bc we want the spinner to render after its parent 
+        renderSpinner(recipeContainer);
         // res is going to return a promise 
         const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886");
         // .json() is going to return another promise 
