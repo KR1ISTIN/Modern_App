@@ -1,4 +1,7 @@
 import icons from 'url:../img/icons.svg'; // how you write the path with using Parcel 2
+import 'core-js/stable'; // polyfilling everything else lines 2/3 are so older browsers can use this app
+import 'regenerator-runtime'; //polyfilling async await
+
 
 const recipeContainer = document.querySelector('.recipe');
 
