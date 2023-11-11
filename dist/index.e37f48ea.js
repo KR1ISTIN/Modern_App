@@ -606,9 +606,11 @@ const showRecipe = async function() {
             image: recipe.image_url,
             servings: recipe.servings,
             cookingTime: recipe.cooking_time,
-            ingredints: recipe.ingredints
+            ingredients: recipe.ingredients
         };
         console.log(recipe);
+        // used map function to map over the ingreds with will great a array with each ingred containing the template, .join() was used...
+        // so that the the list of ingreds would be rendered, without .join() only an array would be evaluated which is not cannot be executed for the html doc 
         const markup = `
     <figure class="recipe__fig">
       <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
@@ -662,28 +664,20 @@ const showRecipe = async function() {
     <div class="recipe__ingredients">
       <h2 class="heading--2">Recipe ingredients</h2>
       <ul class="recipe__ingredient-list">
-        <li class="recipe__ingredient">
-          <svg class="recipe__icon">
-            <use href="src/img/icons.svg#icon-check"></use>
-          </svg>
-          <div class="recipe__quantity">1000</div>
-          <div class="recipe__description">
-            <span class="recipe__unit">g</span>
-            pasta
-          </div>
-        </li>
-
-        <li class="recipe__ingredient">
-          <svg class="recipe__icon">
-            <use href="src/img/icons.svg#icon-check"></use>
-          </svg>
-          <div class="recipe__quantity">0.5</div>
-          <div class="recipe__description">
-            <span class="recipe__unit">cup</span>
-            ricotta cheese
-          </div>
-        </li>
-      </ul>
+      ${recipe.ingredients.map((ing)=>{
+            return `
+          <li class="recipe__ingredient">
+            <svg class="recipe__icon">
+              <use href="src/img/icons.svg#icon-check"></use>
+            </svg>
+            <div class="recipe__quantity">${ing.quantity}</div>
+            <div class="recipe__description">
+              <span class="recipe__unit">${ing.unit}</span>
+              ${ing.description}
+            </div>
+          </li>
+        `;
+        }).join("")}
     </div>
 
     <div class="recipe__directions">
@@ -705,6 +699,8 @@ const showRecipe = async function() {
       </a>
     </div>
     `;
+        // setting to empy string to get rid of any messages so it will not pop up with the recipes
+        recipeContainer.innerHTML = "";
         // recipeContainer is the parent element, so we want to insert markup variable  AFTER 
         recipeContainer.insertAdjacentHTML("afterbegin", markup);
     } catch (err) {
