@@ -1,4 +1,5 @@
-import icons from 'url:../img/icons.svg'; // how you write the path with using Parcel 2
+import icons from 'url:../../img/icons.svg'; // how you write the path with using Parcel 2
+import {Fraction} from 'fractional';
 
 class RecipeView {
     // private field on the classes, each view will have this parentElement property 
@@ -10,9 +11,9 @@ class RecipeView {
         this.#data = data;
 
         // calls to return html str
-        const markup = this.#generateMarkup
+        const markup = this.#generateMarkup();
         
-        this.#clear;
+        this.#clear();
    
         // recipeContainer is the parent element, so we want to insert markup variable  AFTER 
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
@@ -101,7 +102,7 @@ class RecipeView {
             <svg class="recipe__icon">
               <use href="${icons}#icon-check"></use>
             </svg>
-            <div class="recipe__quantity">${ing.quantity}</div>
+            <div class="recipe__quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ''}</div>
             <div class="recipe__description">
               <span class="recipe__unit">${ing.unit}</span>
               ${ing.description}

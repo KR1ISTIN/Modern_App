@@ -24,7 +24,8 @@ const timeout = function (s) {
 const controlRecipes = async function() {
   // wrap in try and catch to help with err handling 
   try {
-    const id = window.location.hash.slice(1);
+    //const id = window.location.hash.slice(1);
+    const id = '5ed6604591c37cdc054bc886'
    
     recipeView.renderSpinner();
 
