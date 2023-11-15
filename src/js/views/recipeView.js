@@ -1,3 +1,5 @@
+import icons from 'url:../img/icons.svg'; // how you write the path with using Parcel 2
+
 class RecipeView {
     // private field on the classes, each view will have this parentElement property 
     #parentElement = document.querySelector('.recipe');
@@ -9,12 +11,32 @@ class RecipeView {
 
         // calls to return html str
         const markup = this.#generateMarkup
-  
-        // setting to empy string to get rid of any messages so it will not pop up with the recipes
-        recipeContainer.innerHTML = '';
+        
+        this.#clear;
+   
         // recipeContainer is the parent element, so we want to insert markup variable  AFTER 
-        recipeContainer.insertAdjacentHTML("afterbegin", markup);
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     }
+
+    // all views will have access to this method 
+    // setting to empy string to get rid of any messages so it will not pop up with the recipes
+    #clear() {
+        this.#parentElement.innerHTML = ''
+    }
+
+    //public method since there is no hash
+    // spinner while loading recipes  
+    renderSpinner = function() {
+        const markup = `
+        <div class="spinner">
+            <svg>
+            <use href="${icons}#icon-loader"></use>
+            </svg>
+        </div> 
+        `;
+        this.#parentElement.innerHTML = '';
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    };
 
     // returns a html string from data saved in the render method above
     #generateMarkup() {
