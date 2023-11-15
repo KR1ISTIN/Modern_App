@@ -1,3 +1,5 @@
+import * as model from '.model.js';
+
 import icons from 'url:../img/icons.svg'; // how you write the path with using Parcel 2
 import 'core-js/stable'; // polyfilling everything else lines 2/3 are so older browsers can use this app
 import 'regenerator-runtime'; //polyfilling async await
@@ -34,32 +36,14 @@ const renderSpinner = function(parentElement) {
 const showRecipe = async function() {
   // wrap in try and catch to help with err handling 
   try {
+    const id = window.location.hash.slice(1);
     // passing recipeContainer to func bc we want the spinner to render after its parent 
     renderSpinner(recipeContainer);
 
-    // res is going to return a promise 
-    const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
-    
-    // .json() is going to return another promise 
-    const data = await res.json();
-    console.log(res, data);
+    // 1) LOAD RECIPE (this is a async function so it will return a promise, so we need to await for the promise)
+    await model.loadRecipe(id);
 
-    if(!res.ok) throw new Error(`${data.message} (${res.status})`);
 
-    // obj destructuring bc data.data has a proptery name recipe 
-    let {recipe} = data.data;
-    // creating a new obj with data
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients
-    };
-    console.log(recipe);
 
     // used map function to map over the ingreds with will great a array with each ingred containing the template, .join() was used...
     // so that the the list of ingreds would be rendered, without .join() only an array would be evaluated which is not cannot be executed for the html doc 
@@ -166,4 +150,12 @@ const showRecipe = async function() {
   }
 };
 
-showRecipe();
+ 
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
+
+// when the id changes for a recipe 
+// however these two event listeners are the same therefore creating an array with the listers and looping
+// over will make for cleaner code
+//window.addEventListener('hashchange', showRecipe);
+// event will fire off when page has finished loading 
+//window.addEventListener('load', showRecipe);
