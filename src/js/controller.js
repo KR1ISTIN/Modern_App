@@ -50,15 +50,6 @@ const showRecipe = async function() {
     // this will now take the object being stored in step 1 and pass it to the render method
     recipeView.render(model.state.recipe);
 
-
-    // setting to empy string to get rid of any messages so it will not pop up with the recipes
-    recipeContainer.innerHTML = '';
-
-    // recipeContainer is the parent element, so we want to insert markup variable  AFTER 
-    recipeContainer.insertAdjacentHTML("afterbegin", markup);
-
-
-
   }
   catch (err) {
     console.log(err);
