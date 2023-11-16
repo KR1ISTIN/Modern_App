@@ -1,5 +1,6 @@
 import 'regenerator-runtime';
 import { API_URL } from './config.js';
+import {getJSON} from './helpers.js'
 
 export const state = {
     recipe: {}
@@ -9,14 +10,9 @@ export const state = {
 // then the state will contain the recipe at which then the controller will take the recipe out of there 
 export const loadRecipe = async function(id) {
     try{
-         // res is going to return a promise 
-         const res = await fetch(`${API_URL}/${id}`);
-    
-         // .json() is going to return another promise 
-         const data = await res.json();
-         console.log(res, data);
-     
-         if(!res.ok) throw new Error(`${data.message} (${res.status})`);
+        // needs to be await since we are in a async function awaiting a promise from the getJSON async function 
+        const data = await getJSON(`${API_URL}/${id}`)
+        
      
          // obj destructuring bc data.data has a proptery name recipe 
          let {recipe} = data.data;
@@ -32,10 +28,8 @@ export const loadRecipe = async function(id) {
            ingredients: recipe.ingredients
          };
          console.log(state.recipe);
- 
 
     } catch (err) {
-        console.log(err)
-    }
-       
+        console.error(err);
+    }    
 }
