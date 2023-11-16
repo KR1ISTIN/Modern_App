@@ -2483,13 +2483,14 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
+var _configJs = require("./config.js");
 const state = {
     recipe: {}
 };
 const loadRecipe = async function(id) {
     try {
         // res is going to return a promise 
-        const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+        const res = await fetch(`${(0, _configJs.API_URL)}/${id}`);
         // .json() is going to return another promise 
         const data = await res.json();
         console.log(res, data);
@@ -2513,7 +2514,16 @@ const loadRecipe = async function(id) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs"}],"k5Hzs":[function(require,module,exports) {
+// this file will contain all the variables that should be const and should be reused across the project
+// the goal is having all these variables that will allow us to config the project by changing some of the data 
+// const that will never change 
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("url:../../img/icons.svg"); // how you write the path with using Parcel 2

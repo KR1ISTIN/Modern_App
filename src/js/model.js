@@ -1,4 +1,5 @@
 import 'regenerator-runtime';
+import { API_URL } from './config.js';
 
 export const state = {
     recipe: {}
@@ -9,7 +10,7 @@ export const state = {
 export const loadRecipe = async function(id) {
     try{
          // res is going to return a promise 
-         const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+         const res = await fetch(`${API_URL}/${id}`);
     
          // .json() is going to return another promise 
          const data = await res.json();
