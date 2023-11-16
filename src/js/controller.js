@@ -6,13 +6,6 @@ import 'core-js/stable'; // polyfilling everything else lines 2/3 are so older b
 import 'regenerator-runtime'; //polyfilling async await
 
 
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
 
 // https://forkify-api.herokuapp.com/v2
 
